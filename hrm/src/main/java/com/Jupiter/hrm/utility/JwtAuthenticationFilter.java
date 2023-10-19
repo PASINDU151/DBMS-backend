@@ -36,7 +36,7 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
             try {
                 String username = jwtUtil.extractUsername(token);
                 String role = jwtUtil.extractRole(token); // Extract the role from the token as a String
-                System.out.println("Username and role: " + username + " " + role);
+                System.out.println("Username and role:" + username + " " + role);
 
                 if (username != null) {
                     List<GrantedAuthority> authorities = new ArrayList<>();
