@@ -19,7 +19,6 @@ import java.util.Map;
 import java.util.Set;
 
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/employees")
 
@@ -67,7 +66,6 @@ public class EmployeeController {
         return HttpStatus.CREATED;
     }
     @GetMapping
-//    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<Employee>> getAllEmployees() {
         List<Employee> employees = employeeService.getAllEmployees();
         return new ResponseEntity<>(employees, HttpStatus.OK);
@@ -83,7 +81,6 @@ public class EmployeeController {
 
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<EmployeeDto> getEmployeeById(@PathVariable int id) {
         EmployeeDto employee = modelMapper.map(employeeService.getEmployeeById(id), EmployeeDto.class);
         return new ResponseEntity<>(employee, HttpStatus.OK);
@@ -92,7 +89,6 @@ public class EmployeeController {
 
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public HttpStatus updateEmployee(@PathVariable int id, @RequestBody EmployeeDto updatedEmployee) {
         System.out.println(updatedEmployee.getEmergency_contact_id());
         if(employeeService.updateEmployee(id, modelMapper.map(updatedEmployee, Employee.class))){
@@ -106,7 +102,6 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteEmployee(@PathVariable int id) {
         boolean deleted = employeeService.deleteEmployee(id);
         if(deleted){
